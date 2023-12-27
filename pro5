@@ -1,98 +1,58 @@
 import java.util.Scanner;
 
-class ComplexNumber 
+public class Polymorphism 
 {
-    private double real;
-    private double imaginary;
-
-    public ComplexNumber(double real, double imaginary) 
+    public void compare(String s1, String s2)
     {
-        this.real = real;
-        this.imaginary = imaginary;
-    }
-
-    public ComplexNumber add(ComplexNumber other) 
-    {
-        double t1 = this.real + other.real;
-        double t2 = this.imaginary + other.imaginary;
-        return new ComplexNumber(t1, t2);
-    }
-
-    public ComplexNumber subtract(ComplexNumber other) 
-    {
-        double t1 = this.real - other.real;
-        double t2 = this.imaginary - other.imaginary;
-        return new ComplexNumber(t1, t2);
-    }
-
-    public void increment() 
-    {
-        this.real++;
-        this.imaginary++;
-    }
-
-    public void decrement() 
-    {
-        this.real--;
-        this.imaginary--;
-    }
-
-    public boolean isEqual(ComplexNumber other) 
-    {
-        return this.real == other.real && this.imaginary == other.imaginary;
-    }
-
-    public void display() 
-    {
-        System.out.println(this.real + " + " + this.imaginary + "i");
-    }
-}
-
-public class Encapsulation 
-{
-    public static void main(String[] args)
-    {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter the real and imaginary part of first Complex Number: ");
-        double r1 = scanner.nextDouble();
-        double i1 = scanner.nextDouble();
-        System.out.print("Enter the real and imaginary part of second Complex Number: ");
-        double r2 = scanner.nextDouble();
-        double i2 = scanner.nextDouble();
-
-        ComplexNumber complex1 = new ComplexNumber(r1, i1);
-        ComplexNumber complex2 = new ComplexNumber(r2, i2);
-
-        System.out.println("The two complex numbers are: ");
-        complex1.display();
-        complex2.display();
-
-        System.out.println("The sum of both complex numbers is: ");
-        ComplexNumber sum = complex1.add(complex2);
-        sum.display();
-
-        System.out.println("The difference of both complex numbers is: ");
-        ComplexNumber diff = complex1.subtract(complex2);
-        diff.display();
-
-        System.out.println("Incrementation of first complex numbers is: ");
-        complex1.increment();
-        complex1.display();
-
-        System.out.println("Decrementation of second complex numbers is: ");
-        complex2.decrement();
-        complex2.display();
-
-        boolean val = complex1.isEqual(complex2);
-        if(val == true)
+        if(s1.compareTo(s2) == 0)
         {
-            System.out.println("The 2 complex numbers are equal");            
+            System.out.println("The 2 strings are same");
         }
         else
         {
-            System.out.println("The 2 complex numbers are not equal");            
+            System.out.println("The 2 strings are not same");
+
         }
-        System.out.println();
     }
+
+    public void compare(String s1, String s2, int n)
+    {
+        int flag = 0;
+        for(int i=0; i<n; i++)
+        {
+            if(s1.charAt(i) != s2.charAt(i))
+            {
+                flag = 1;
+            }
+        }
+        if (flag == 0)
+        {
+            System.out.println("The 2 strings are same upto "+n+" characters");
+        }
+        else
+        {
+            System.out.println("The 2 strings are not same upto "+n+" characters");            
+        }
+    }
+    public static void main(String[] args) 
+    {
+        Scanner scanner = new Scanner(System.in);
+        Polymorphism obj1 = new Polymorphism();
+        System.out.print("Enter the first string: ");
+        String s1 = scanner.nextLine();
+        System.out.print("Enter the second string: ");
+        String s2 = scanner.nextLine();
+
+        obj1.compare(s1,s2);
+
+        System.out.print("Enter the number of characters to compare: ");
+        int n = scanner.nextInt();
+
+        obj1.compare(s1,s2,n);
+        
+        scanner.close();
+    }
+
 }
+
+        
