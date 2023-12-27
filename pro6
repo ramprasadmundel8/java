@@ -3,7 +3,8 @@ import java.util.Scanner;
 class bank 
 {
     public String name, acc;
-    public double intrate, bal;
+    public int year;
+    public double intrate, bal, intamt;
 
     public void getdata() 
     {
@@ -13,6 +14,8 @@ class bank
         name = scanner.nextLine();
         System.out.print("Enter Account Number: ");
         acc = scanner.nextLine();
+        System.out.print("Enter Year: ");
+        year = scanner.nextInt();
         System.out.print("Enter Balance: ");
         bal = scanner.nextDouble();
         System.out.println();
@@ -23,12 +26,15 @@ class bank
     {
         System.out.println("Name: " + name);
         System.out.println("Account Number: " + acc);
+        System.out.println("Year: " + year);
         System.out.println("Balance: " + bal);
         System.out.println();
     }
 
     public void interest() 
     {
+        intamt = 0;
+        intrate = 0;
         System.out.println();
     }
 }
@@ -39,7 +45,8 @@ class SBIbank extends bank
     {
         intrate = 0.06;
         System.out.println("The Interest rate is: " + intrate);
-        System.out.println("The Interest earned is: " + (intrate*bal));
+        intamt = intrate*bal;
+        System.out.println("The Interest earned is: " + intamt);
         System.out.println();
     }
 }
@@ -50,7 +57,8 @@ class Citybank extends bank
     {
         intrate = 0.05;
         System.out.println("The Interest rate is: " + intrate);
-        System.out.println("The Interest earned is: " + (intrate*bal));
+        intamt = intrate*bal;
+        System.out.println("The Interest earned is: " + intamt);
         System.out.println();
     }
 }
@@ -61,34 +69,73 @@ class Canarabank extends bank
     {
         intrate = 0.09;
         System.out.println("The Interest rate is: " + intrate);
-        System.out.println("The Interest earned is: " + (intrate*bal));
+        intamt = intrate*bal;
+        System.out.println("The Interest earned is: " + intamt);
         System.out.println();
     }
 }
 
-public class Inheritance 
+public class InheritanceMod
 {
     public static void main(String[] args) 
     {
         Scanner scanner = new Scanner(System.in);
-        SBIbank c2 = new SBIbank();
-        Citybank c3 = new Citybank();
-        Canarabank c4 = new Canarabank();
+        System.out.println("Enter the number of customers: ");
+        int n = scanner.nextInt();
+        SBIbank [] c1 = new SBIbank[n];
+        Citybank [] c2 = new Citybank[n];
+        Canarabank [] c3 = new Canarabank[n];
 
         System.out.println("Welcome to SBI bank");
-        c2.getdata();
-        c2.printdata();
-        c2.interest();
+        for(int i=0; i<n; i++)
+        {
+            System.out.println("Enter Details of customer "+(i+1));
+            c1[i] = new SBIbank();
+            c1[i].getdata();
+            c1[i].printdata();
+            c1[i].interest();
+        }
 
         System.out.println("Welcome to City bank");
-        c3.getdata();
-        c3.printdata();
-        c3.interest();
-        
-        System.out.println("Welcome to Canara bank");
-        c4.getdata();
-        c4.printdata();
-        c4.interest();
+        for(int i=0; i<n; i++)
+        {
+            System.out.println("Enter Details of customer "+(i+1));
+            c2[i] = new Citybank();
+            c2[i].getdata();
+            c2[i].printdata();
+            c2[i].interest();
+        }
 
+        System.out.println("Welcome to Canara bank");
+        for(int i=0; i<n; i++)
+        {
+            System.out.println("Enter Details of customer "+(i+1));
+            c3[i] = new Canarabank();
+            c3[i].getdata();
+            c3[i].printdata();
+            c3[i].interest();
+        }
+        System.out.println("Enter the year to find highest Interest Earner in SBI Bank: ");
+        int y = scanner.nextInt();
+
+        double max = 0;
+        int index = 0;
+        for(int i=0; i<n; i++)
+        {
+            if(c1[i].year == y)
+            {
+                if(c1[i].intamt > max)
+                {
+                    max = c1[i].intamt;
+                    index = i;
+                }
+            }
+        }
+        System.out.println("Details of the highest Interest Earner in SBI Bank: ");
+        c1[index].printdata();
+        c1[index].interest();
     }
 }
+
+    
+   
