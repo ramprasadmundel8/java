@@ -1,0 +1,35 @@
+import java.util.Scanner;
+public class test9 {
+ // Interface for conversion computation
+ interface Compute {
+ double convert(double value);
+ }
+ // Concrete class for kilobyte to gigabyte conversion
+ static class KiloToGiga implements Compute {
+ public double convert(double kilobyte) {
+ return kilobyte / (1024 * 1024); 
+ }
+ }
+ // Concrete class for euro to rupee conversion
+ static class EuroToRupees implements Compute {
+ public double convert(double euro) {
+ return euro * 89.70; 
+ }
+ }
+ public static void main(String[] args) {
+ Compute kiloToGiga = new KiloToGiga();
+ Compute euroToRupees = new EuroToRupees();
+ Scanner input = new Scanner(System.in);
+ System.out.println("Enter the value of kilobyte:");
+ double kb = input.nextDouble();
+ System.out.println("Enter the value of euro:");
+ double er = input.nextDouble();
+ double inGiga = kiloToGiga.convert(kb);
+ double inRupees = euroToRupees.convert(er);
+ System.out.println("After conversion of kilobyte to gigabyte is: " + 
+inGiga + " gigabytes");
+ System.out.println("After conversion of euro to Rupees is: " + 
+inRupees + " Rupees");
+ input.close();
+ }
+}
